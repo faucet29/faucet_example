@@ -8,7 +8,7 @@
 常用Utils、APP新手操作引导、上下刷新加载、集成了滑动返回及权限请求等快捷开发的baseactivity、OKhttp请求框架封装、glide图片加载封装等
 
 **仿微信、钉钉群组头像库GroupHeadViewLib**  
-参考https://github.com/SheHuan/CombineBitmap 修改整理  
+参考CombineBitmap https://github.com/SheHuan/CombineBitmap 修改整理  
 在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。  
 ![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200113-162807%402x.png)
 
