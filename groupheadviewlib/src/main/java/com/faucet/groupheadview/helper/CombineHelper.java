@@ -88,7 +88,7 @@ public class CombineHelper {
                             }
                         });
             } else {
-                Bitmap textBitmap = Utils.combineBitmap(builder.urls[i], getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
+                Bitmap textBitmap = Utils.combineBitmap(Utils.getLmtStrEndWith(builder.urls[i],2), getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
                 if (textBitmap != null) {
                     handler.obtainMessage(1, finalI, -1, textBitmap).sendToTarget();
                 } else {
