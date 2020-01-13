@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#f5f5f5</color>
+    <color name="titlebar_bg_color">#FFFFFF</color>
+    <color name="app_line">#EEEEEE</color>
+    <color name="hint_color">#999999</color>
+    <color name="text_main_black">#333333</color>
+    <color name="text_main_gray">#999999</color>
+    <color name="transparent">#00000000</color>
+</resources>

@@ -1,0 +1,2 @@
+include ':app', ':greendao', ':quickutils', ':dbmaker'
+rootProject.name='FaucetExample'
