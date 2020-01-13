@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class ShareUtil {
 
     public static void SystemShare(Context context, String text , Uri uri ){ //系统自带的分享，会通过你安装的软件，已列表方式显示出来，选择自己想要的分享方式
@@ -85,18 +83,19 @@ public class ShareUtil {
         }
     }
     
-    public static void ShareToWeixinFriendster(Context context, String title, ArrayList<Uri> uris){//分享到微信朋友圈
+    public static void ShareToWeixinFriendster(Context context, String title, Uri uri){//分享到微信朋友圈
         try {
             Intent intent = new Intent();
             ComponentName comp = new ComponentName("com.tencent.mm" , "com.tencent.mm.ui.tools.ShareToTimeLineUI" );
             intent.setComponent( comp);
-            intent.setAction(Intent. ACTION_SEND_MULTIPLE);
-            if( uris == null){
+            intent.setAction(Intent.ACTION_SEND);
+            if( uri == null){
                 intent.setType( "text/plain");
             } else{
                 intent.setType( "image/*");
-                intent.putParcelableArrayListExtra(Intent. EXTRA_STREAM, uris);
+                intent.putExtra(Intent. EXTRA_STREAM, uri);
             }
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.putExtra( "Kdescription", title);
             context.startActivity( intent);
         } catch (Exception e) {

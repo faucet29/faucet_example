@@ -1,5 +1,6 @@
 package com.faucet.groupheadview.helper;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.bumptech.glide.Glide;
@@ -7,6 +8,7 @@ import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.faucet.groupheadview.R;
 import com.faucet.groupheadview.listener.OnHandlerListener;
 
 import java.util.concurrent.ExecutionException;
@@ -29,6 +31,29 @@ public class CombineHelper {
     }
 
     /**
+     * 获取颜色值
+     * @return
+     */
+    private String getColor(int id, Context context){
+        String[] colors = getColorArray(context);
+        int number = id % colors.length;
+        return colors[number];
+    }
+
+    private String[] getColorArray(Context context){
+        return  context.getResources().getStringArray(R.array.color_array);
+    }
+
+    private int stringToInt(String value) {
+        int ascii = 0;
+        char[] chars = value.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            ascii += (int) chars[i];
+        }
+        return ascii;
+    }
+
+    /**
      * 通过url加载
      *
      * @param builder
@@ -48,20 +73,28 @@ public class CombineHelper {
         });
         for (int i = 0; i < builder.count; i++) {
             final int finalI = i;
-            GlideApp.with(builder.context)
-                    .asBitmap()
-                    .placeholder(builder.placeholder)
-                    .load(builder.urls[i])
-                    .into(new SimpleTarget<Bitmap>(subSize, subSize) {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            if (resource != null) {
-                                handler.obtainMessage(1, finalI, -1, resource).sendToTarget();
-                            } else {
-                                handler.obtainMessage(2, finalI, -1, null).sendToTarget();
+            if (builder.urls[i].contains("http://") || builder.urls[i].contains("https://")) {
+                GlideApp.with(builder.context)
+                        .asBitmap()
+                        .load(builder.urls[i])
+                        .into(new SimpleTarget<Bitmap>(subSize, subSize) {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                if (resource != null) {
+                                    handler.obtainMessage(1, finalI, -1, resource).sendToTarget();
+                                } else {
+                                    handler.obtainMessage(2, finalI, -1, null).sendToTarget();
+                                }
                             }
-                        }
-                    });
+                        });
+            } else {
+                Bitmap textBitmap = Utils.combineBitmap(builder.urls[i], getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
+                if (textBitmap != null) {
+                    handler.obtainMessage(1, finalI, -1, textBitmap).sendToTarget();
+                } else {
+                    handler.obtainMessage(2, finalI, -1, null).sendToTarget();
+                }
+            }
         }
     }
 
