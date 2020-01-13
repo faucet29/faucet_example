@@ -1,12 +1,16 @@
 # 快捷开发及常用库
 
 #### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+本工程包含快捷开发库QuickUtil, 仿微信、钉钉群组头像库GroupHeadViewLib, 及部分第三方框架的高级使用案例测试（greendao 3.2.2 使用greendao-generator-3.2.2 实现快速建库及自定义关联表）
 
 #### 软件架构
-软件架构说明
+**快捷开发库QuickUtil包含**
+  常用Utils、APP新手操作引导、上下刷新加载、集成了滑动返回及权限请求等快捷开发的baseactivity、OKhttp请求框架封装、glide图片加载封装等
+
+**仿微信、钉钉群组头像库GroupHeadViewLib**
+  参考https://github.com/SheHuan/CombineBitmap 修改整理
+  在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。
+  
 
 
 #### 安装教程
