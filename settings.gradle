@@ -1,2 +1,2 @@
-include ':app', ':greendao', ':quickutils', ':dbmaker'
+include ':app', ':greendao', ':quickutils', ':dbmaker', ':groupheadviewlib', ':groupheadviewexmample'
 rootProject.name='FaucetExample'

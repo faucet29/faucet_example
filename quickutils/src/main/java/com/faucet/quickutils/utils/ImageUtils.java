@@ -2,12 +2,18 @@ package com.faucet.quickutils.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.faucet.quickutils.core.manager.GlideApp;
 
 /**
@@ -161,6 +167,18 @@ public abstract class ImageUtils {
                 .placeholder(setPlaceHolder())
                 .transform(new GlideCircleTransform(context, borderWidth, borderColor))
                 .into(iv);
+    }
+
+    public void getImageBitmap (Context context, String url, int width, int height, OnHandlerListener onHandlerListener) {
+        if (!isContextError(context))
+            GlideApp.with(context)
+                .asBitmap().load(url)
+                .into(new SimpleTarget<Bitmap>(width, height) {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        onHandlerListener.onComplete(resource);
+                    }
+                });
     }
 
     private boolean isContextError (Context context) {
