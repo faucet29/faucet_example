@@ -4,40 +4,51 @@
 本工程包含快捷开发库QuickUtil, 仿微信、钉钉群组头像库GroupHeadViewLib, 及部分第三方框架的高级使用案例测试（greendao 3.2.2 使用greendao-generator-3.2.2 实现快速建库及自定义关联表）
 
 #### 软件架构
-**快捷开发库QuickUtil包含**
-  常用Utils、APP新手操作引导、上下刷新加载、集成了滑动返回及权限请求等快捷开发的baseactivity、OKhttp请求框架封装、glide图片加载封装等
+**快捷开发库QuickUtil包含**  
+常用Utils、APP新手操作引导、上下刷新加载、集成了滑动返回及权限请求等快捷开发的baseactivity、OKhttp请求框架封装、glide图片加载封装等
 
-**仿微信、钉钉群组头像库GroupHeadViewLib**
-  参考https://github.com/SheHuan/CombineBitmap 修改整理
-  在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。
-  
+**仿微信、钉钉群组头像库GroupHeadViewLib**  
+参考https://github.com/SheHuan/CombineBitmap 修改整理  
+在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。  
+![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200113-162807%402x.png)
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+无
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+**GroupHeadViewLib使用**  
+```
+CombineBitmap.init(context)
+    .setLayoutManager() // 必选， 设置图片的组合形式，支持WechatLayoutManager、DingLayoutManager
+    .setSize() // 必选，组合后Bitmap的尺寸，单位dp
+    .setGap() // 单个图片之间的距离，单位dp，默认0dp
+    .setGapColor() // 单个图片间距的颜色，默认白色
+    .setPlaceholder() // 单个图片加载失败的默认显示图片
+    .setUrls() // 要加载的图片url数组
+    .setBitmaps() // 要加载的图片bitmap数组
+    .setResourceIds() // 要加载的图片资源id数组
+    .setImageView() // 直接设置要显示图片的ImageView
+    // 设置“子图片”的点击事件，需使用setImageView()，index和图片资源数组的索引对应
+    .setOnSubItemClickListener(new OnSubItemClickListener() {
+        @Override
+        public void onSubItemClick(int index) {
 
-#### 参与贡献
+        }
+    })
+    // 加载进度的回调函数，如果不使用setImageView()方法，可在onComplete()完成最终图片的显示
+    .setProgressListener(new ProgressListener() {
+        @Override
+        public void onStart() {
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+        }
 
+        @Override
+        public void onComplete(Bitmap bitmap) {
 
-#### 码云特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+        }
+    })
+    .build();
+```
