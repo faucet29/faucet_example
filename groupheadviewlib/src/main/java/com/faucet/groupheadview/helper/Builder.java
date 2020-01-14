@@ -100,7 +100,7 @@ public class Builder {
         return this;
     }
 
-    public Builder setUrls(String... urls) {
+    public Builder setUrlsOrTexts(String... urls) {
         if (urls.length > 9) {
             String[] _urls = new String[9];
             System.arraycopy(urls, 0, _urls, 0, 9);
