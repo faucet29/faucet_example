@@ -10,6 +10,8 @@
 **仿微信、钉钉群组头像库GroupHeadViewLib**  
 参考CombineBitmap https://github.com/SheHuan/CombineBitmap 修改整理  
 在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。  
+![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200114-105050%402x.png)
+![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200114-105101%402x.png)  
 ![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200113-162807%402x.png)
 
 
@@ -27,7 +29,7 @@ CombineBitmap.init(context)
     .setGap() // 单个图片之间的距离，单位dp，默认0dp
     .setGapColor() // 单个图片间距的颜色，默认白色
     .setPlaceholder() // 单个图片加载失败的默认显示图片
-    .setUrls() // 要加载的图片url数组
+    .setUrls() // 要加载的图片url数组，也可直接传文字
     .setBitmaps() // 要加载的图片bitmap数组
     .setResourceIds() // 要加载的图片资源id数组
     .setImageView() // 直接设置要显示图片的ImageView
