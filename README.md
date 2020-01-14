@@ -10,10 +10,9 @@
 **仿微信、钉钉群组头像库GroupHeadViewLib**  
 参考CombineBitmap https://github.com/SheHuan/CombineBitmap 修改整理  
 在其基础上修改图片加载为glide加载，支持androidX的使用，支持图文头像。  
+![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200113-162807%402x.png)  
 ![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200114-105050%402x.png)
 ![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200114-105101%402x.png)  
-![image](https://github.com/faucet29/faucet_example/blob/master/image/WX20200113-162807%402x.png)
-
 
 #### 安装教程
 
