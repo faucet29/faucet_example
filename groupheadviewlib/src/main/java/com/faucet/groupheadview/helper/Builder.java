@@ -88,20 +88,41 @@ public class Builder {
     }
 
     public Builder setBitmaps(Bitmap... bitmaps) {
-        this.bitmaps = bitmaps;
-        this.count = bitmaps.length;
+        if (bitmaps.length > 9) {
+            Bitmap[] _bitmaps = new Bitmap[9];
+            System.arraycopy(bitmaps, 0, _bitmaps, 0, 9);
+            this.bitmaps = _bitmaps;
+            this.count = 9;
+        } else {
+            this.bitmaps = bitmaps;
+            this.count = bitmaps.length;
+        }
         return this;
     }
 
     public Builder setUrls(String... urls) {
-        this.urls = urls;
-        this.count = urls.length;
+        if (urls.length > 9) {
+            String[] _urls = new String[9];
+            System.arraycopy(urls, 0, _urls, 0, 9);
+            this.urls = _urls;
+            this.count = 9;
+        } else {
+            this.urls = urls;
+            this.count = urls.length;
+        }
         return this;
     }
 
     public Builder setResourceIds(int... resourceIds) {
-        this.resourceIds = resourceIds;
-        this.count = resourceIds.length;
+        if (resourceIds.length > 9) {
+            int[] _resourceIds = new int[9];
+            System.arraycopy(resourceIds, 0, _resourceIds, 0, 9);
+            this.resourceIds = _resourceIds;
+            this.count = 9;
+        } else {
+            this.resourceIds = resourceIds;
+            this.count = resourceIds.length;
+        }
         return this;
     }
 
