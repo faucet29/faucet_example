@@ -2,6 +2,7 @@ package com.faucet.groupheadview.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.FutureTarget;
@@ -9,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.faucet.groupheadview.R;
+import com.faucet.groupheadview.cache.LruCacheHelper;
 import com.faucet.groupheadview.listener.OnHandlerListener;
 
 import java.util.concurrent.ExecutionException;
@@ -21,9 +23,10 @@ public class CombineHelper {
         return SingletonHolder.instance;
     }
 
+    private LruCacheHelper lruCacheHelper;
 
     private CombineHelper(){
-
+        lruCacheHelper = new LruCacheHelper();
     }
 
     private static class SingletonHolder {
@@ -88,7 +91,13 @@ public class CombineHelper {
                             }
                         });
             } else {
-                Bitmap textBitmap = Utils.combineBitmap(Utils.getLmtStrEndWith(builder.urls[i],2), getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
+                // 尝试从内存缓存中读取
+                String key = Utils.hashKeyFormUrl(builder.urls[i]);
+                Bitmap textBitmap = lruCacheHelper.getBitmapFromMemCache(key);
+                if (textBitmap == null) {
+                    textBitmap = Utils.combineBitmap(Utils.getLmtStrEndWith(builder.urls[i],2), getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
+                    lruCacheHelper.addBitmapToMemoryCache(key, textBitmap);
+                }
                 if (textBitmap != null) {
                     handler.obtainMessage(1, finalI, -1, textBitmap).sendToTarget();
                 } else {
