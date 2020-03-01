@@ -2,6 +2,7 @@ package com.faucet.groupheadview.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
@@ -89,17 +90,27 @@ public class CombineHelper {
                                     handler.obtainMessage(2, finalI, -1, null).sendToTarget();
                                 }
                             }
+
+                            @Override
+                            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                                super.onLoadFailed(errorDrawable);
+                                handler.obtainMessage(2, finalI, -1, null).sendToTarget();
+                            }
                         });
             } else {
-                // 尝试从内存缓存中读取
-                String key = Utils.hashKeyFormUrl(builder.urls[i]);
-                Bitmap textBitmap = lruCacheHelper.getBitmapFromMemCache(key);
-                if (textBitmap == null) {
-                    textBitmap = Utils.combineBitmap(Utils.getLmtStrEndWith(builder.urls[i],2), getColor(stringToInt(builder.urls[i]), builder.context), subSize, subSize);
-                    lruCacheHelper.addBitmapToMemoryCache(key, textBitmap);
-                }
-                if (textBitmap != null) {
-                    handler.obtainMessage(1, finalI, -1, textBitmap).sendToTarget();
+                if (builder.enableTextIcon) {
+                    // 尝试从内存缓存中读取
+                    String key = Utils.hashKeyFormUrl(builder.urls[i]);
+                    Bitmap textBitmap = lruCacheHelper.getBitmapFromMemCache(key);
+                    if (textBitmap == null) {
+                        textBitmap = Utils.combineBitmap(Utils.getLmtStrEndWith(builder.urls[i],2), getColor(stringToInt(Utils.getLmtStrEndWith(builder.urls[i],2)), builder.context), subSize, subSize);
+                        lruCacheHelper.addBitmapToMemoryCache(key, textBitmap);
+                    }
+                    if (textBitmap != null) {
+                        handler.obtainMessage(1, finalI, -1, textBitmap).sendToTarget();
+                    } else {
+                        handler.obtainMessage(2, finalI, -1, null).sendToTarget();
+                    }
                 } else {
                     handler.obtainMessage(2, finalI, -1, null).sendToTarget();
                 }

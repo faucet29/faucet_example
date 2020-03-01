@@ -3,6 +3,7 @@ package com.faucet.map;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMapException;
 import com.amap.api.maps.AMapUtils;
@@ -52,6 +53,8 @@ public class MapUtil {
                 naviPara.setNaviStyle(type);
                 // 调起高德地图导航
                 AMapUtils.openAMapNavi(naviPara, mContext);
+            } else {
+                Toast.makeText(mContext, "高德地图未安装", Toast.LENGTH_SHORT).show();
             }
 
         } catch (AMapException e) {
@@ -59,20 +62,22 @@ public class MapUtil {
         }
     }
 
-    public static void startNavByUri (String title, LatLng mLatLng, Context mContext) {
+    public static void startNavByUri (Context mContext, String title, LatLng mLatLng, String appName) {
         if (isInstallApp(mContext, "com.autonavi.minimap")) {
             Intent gddtIntent = new Intent("android.intent.action.VIEW",
-                    Uri.parse("androidamap://navi?sourceApplication=“name”&poiname="
+                    Uri.parse("androidamap://navi?sourceApplication="+appName+"&poiname="
                             + title + "&lat=" + mLatLng.latitude + "&lon=" + mLatLng.longitude + "&dev=" + 0
                             + "&style=" + 4));
             gddtIntent.addCategory("android.intent.category.DEFAULT");
             gddtIntent.setPackage("com.autonavi.minimap");
             gddtIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(gddtIntent);
+        } else {
+            Toast.makeText(mContext, "高德地图未安装", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void startBaiduByUri (String title, LatLng mLatLng, Context mContext) {
+    public static void startBaiduByUri (Context mContext, String title, LatLng mLatLng, String appName) {
         double[] position = gaoDeToBaidu(mLatLng.latitude, mLatLng.longitude);
         Intent intent = null;
         try {
@@ -84,8 +89,10 @@ public class MapUtil {
                                 + position[1]
                                 + "&title="+title
                                 + "&content="+title
-                                + "&coordType=bd09ll&src=兔邦邦#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+                                + "&coordType=bd09ll&src="+ appName+"#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
                 mContext.startActivity(intent);
+            } else {
+                Toast.makeText(mContext, "百度地图未安装", Toast.LENGTH_SHORT).show();
             }
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -114,6 +121,8 @@ public class MapUtil {
             intent.setPackage("com.tencent.map");
             intent.setData(Uri.parse(uriString));
             context.startActivity(intent);
+        } else {
+            Toast.makeText(context, "腾讯地图未安装", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -30,6 +30,7 @@ public class Builder {
     public int placeholder  = R.drawable.defalut_placeholder; // 获取图片失败时的默认图片
     public int count; // 要加载的资源数量
     public int subSize; // 单个bitmap的尺寸
+    public boolean enableTextIcon = true;// 是否开启文字头像
 
     public ILayoutManager layoutManager; // bitmap的组合样式
 
@@ -101,6 +102,11 @@ public class Builder {
     }
 
     public Builder setUrlsOrTexts(String... urls) {
+        return setUrlsOrTexts(true, urls);
+    }
+
+    public Builder setUrlsOrTexts(boolean enableTextIcon, String... urls) {
+        this.enableTextIcon = enableTextIcon;
         if (urls.length > 9) {
             String[] _urls = new String[9];
             System.arraycopy(urls, 0, _urls, 0, 9);

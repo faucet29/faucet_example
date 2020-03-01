@@ -75,20 +75,22 @@ public class LocationService {
 
     private void setReGeoParams(double lat, double lon, int scope){
         if (geoCoderEnable) {
-            geocoderSearch = new GeocodeSearch(context);
-            geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
-                @Override
-                public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-                    //坐标转地址
-                    if(onReceiveReGeoData !=null){
-                        onReceiveReGeoData.onReceiveReGeoData(new ReGeoLocationBean().transformData(regeocodeResult));
+            if (geocoderSearch == null) {
+                geocoderSearch = new GeocodeSearch(context);
+                geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+                    @Override
+                    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+                        //坐标转地址
+                        if(onReceiveReGeoData !=null){
+                            onReceiveReGeoData.onReceiveReGeoData(new ReGeoLocationBean().transformData(regeocodeResult));
+                        }
                     }
-                }
 
-                @Override
-                public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-                }
-            });
+                    @Override
+                    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+                    }
+                });
+            }
             // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
             RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(lat, lon), scope, GeocodeSearch.AMAP);
             geocoderSearch.getFromLocationAsyn(query);// 设置异步逆地理编码请求
@@ -97,19 +99,21 @@ public class LocationService {
 
     private void setGeoParams(String name) {
         if (geoCoderEnable) {
-            geocoderSearch = new GeocodeSearch(context);
-            geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
-                @Override
-                public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-                }
-
-                @Override
-                public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-                    if(onReceiveGeoData !=null&&geocodeResult!=null){
-                        onReceiveGeoData.onReceiveGeoData(geocodeResult);
+            if (geocoderSearch == null) {
+                geocoderSearch = new GeocodeSearch(context);
+                geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+                    @Override
+                    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
                     }
-                }
-            });
+
+                    @Override
+                    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+                        if(onReceiveGeoData !=null&&geocodeResult!=null){
+                            onReceiveGeoData.onReceiveGeoData(geocodeResult);
+                        }
+                    }
+                });
+            }
             // name表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode
             GeocodeQuery query = new GeocodeQuery(name, "010");
             geocoderSearch.getFromLocationNameAsyn(query);
