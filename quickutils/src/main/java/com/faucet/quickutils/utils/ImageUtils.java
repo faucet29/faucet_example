@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -35,6 +37,14 @@ public abstract class ImageUtils {
             GlideApp.with(context)
                     .load(url)
                     .centerCrop()
+                    .placeholder(setPlaceHolder())
+                    .into(iv);
+    }
+
+    public void displayImageNocut(Context context, ImageView iv, String url) {
+        if (!isContextError(context))
+            GlideApp.with(context)
+                    .load(url)
                     .placeholder(setPlaceHolder())
                     .into(iv);
     }
@@ -113,11 +123,15 @@ public abstract class ImageUtils {
      * @param corner
      */
     public void displayRoundedCornersImage (Context context, ImageView iv, String url, int corner) {
-        if (!isContextError(context))
+        if (!isContextError(context)) {
+            RequestOptions options = new RequestOptions().transform(new GlideRoundTransform(context, corner));
             GlideApp.with(context)
-                .load(url + "?x-oss-process=image/resize,p_70")
-                .transform(new GlideRoundTransform(context, corner)) //此处为圆角dp值
-                .into(iv);
+                    .load(url + "?x-oss-process=image/resize,p_70")
+                    .apply(options)
+                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
+//                    .placeholder(setPlaceHolder())
+                    .into(iv);
+        }
     }
 
     /**
@@ -131,10 +145,12 @@ public abstract class ImageUtils {
         if (!isContextError(context)){
             GlideHalfRoundTransform glideHalfRoundTransform = new GlideHalfRoundTransform(context, corner);
             glideHalfRoundTransform.setExceptCorner(false, false, true, true);
+            RequestOptions options = new RequestOptions().transform(glideHalfRoundTransform);
             GlideApp.with(context)
                     .load(url + "?x-oss-process=image/resize,p_70")
-                    .transform(glideHalfRoundTransform)
-                    .placeholder(setPlaceHolder())
+                    .apply(options)
+                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
+//                    .placeholder(setPlaceHolder())
                     .into(iv);
         }
     }
@@ -146,12 +162,15 @@ public abstract class ImageUtils {
      * @param url
      */
     public void displayCircleImage (Context context, ImageView iv, String url) {
-        if (!isContextError(context))
+        if (!isContextError(context)) {
+            RequestOptions options = new RequestOptions().transform(new GlideCircleTransform(context));
             GlideApp.with(context)
-                .load(url)
-                .placeholder(setPlaceHolder())
-                .transform(new GlideCircleTransform(context))
-                .into(iv);
+                    .load(url)
+                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
+//                    .placeholder(setPlaceHolder())
+                    .apply(options)
+                    .into(iv);
+        }
     }
 
     /**
@@ -161,12 +180,15 @@ public abstract class ImageUtils {
      * @param url
      */
     public void displayCircleImageWithBorder (Context context, ImageView iv, String url, int borderWidth, int borderColor) {
-        if (!isContextError(context))
+        if (!isContextError(context)) {
+            RequestOptions options = new RequestOptions().transform(new GlideCircleTransform(context, borderWidth, borderColor));
             GlideApp.with(context)
-                .load(url)
-                .placeholder(setPlaceHolder())
-                .transform(new GlideCircleTransform(context, borderWidth, borderColor))
-                .into(iv);
+                    .load(url)
+                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
+//                    .placeholder(setPlaceHolder())
+                    .apply(options)
+                    .into(iv);
+        }
     }
 
     public void getImageBitmap (Context context, String url, int width, int height, OnHandlerListener onHandlerListener) {

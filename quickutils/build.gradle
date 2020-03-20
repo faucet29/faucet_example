@@ -2,13 +2,15 @@ apply plugin: 'com.android.library'
 
 def configInfo = rootProject.ext.android
 def libraries = rootProject.ext.dependencies
+def app_version_code = 1010002
+def app_version_name = '1.1.0.2'
 android {
     compileSdkVersion configInfo.compileSdkVersion
     defaultConfig {
         minSdkVersion configInfo.minSdkVersion
         targetSdkVersion configInfo.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode app_version_code
+        versionName app_version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,6 +33,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+            def buildName = "quickutils"
+//            variant.productFlavors.each { product ->
+//                buildName = product.name //获取渠道名字
+//            }
+            outputFileName = "${buildName}_v${app_version_name}.aar"
+        }
+    }
 }
 
 dependencies {
@@ -49,7 +61,7 @@ dependencies {
     api 'cn.bingoogolapple:bga-swipebacklayout:2.0.1'
     compileOnly 'com.squareup.okhttp3:okhttp:3.3.1'
     api 'com.gyf.barlibrary:barlibrary:2.3.0'
-    api 'com.zhy:base-rvadapter:3.0.3'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
     api 'com.kaopiz:kprogresshud:1.2.0'
     api 'androidx.multidex:multidex:2.0.0'
 

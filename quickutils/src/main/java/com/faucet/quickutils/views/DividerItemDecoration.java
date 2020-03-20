@@ -6,11 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.view.View;
 
 /**
  * Created by Faucet on 2017/7/13.
@@ -119,15 +120,33 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             case BOTH_SET:
                 //获取Layout的相关参数
                 int spanCount = this.getSpanCount(parent);
-                if (isLastRaw(parent, itemPosition, spanCount, childCount)) {
-                    // 如果是最后一行，则不需要绘制底部
-                    outRect.set(0, 0, mDividerHeight, 0);
-                } else if (isLastColum(parent, itemPosition, spanCount, childCount)) {
-                    // 如果是最后一列，则不需要绘制右边
-                    outRect.set(0, 0, 0, mDividerHeight);
-                } else {
-                    outRect.set(0, 0, mDividerHeight, mDividerHeight);
+//                if (isLastRaw(parent, itemPosition, spanCount, childCount)) {
+//                    // 如果是最后一行，则不需要绘制底部
+//                    outRect.set(0, 0, mDividerHeight, 0);
+//                } else if (isLastColum(parent, itemPosition, spanCount, childCount)) {
+//                    // 如果是最后一列，则不需要绘制右边
+//                    outRect.set(0, 0, 0, mDividerHeight);
+//                } else {
+//                    outRect.set(0, 0, mDividerHeight, mDividerHeight);
+//                }
+//
+                boolean isLastRow = isLastRaw(parent, itemPosition, spanCount, childCount);
+
+                int top = 0;
+                int left;
+                int right;
+                int bottom;
+                int eachWidth = (spanCount - 1) * mDividerHeight / spanCount;
+                int dl = mDividerHeight - eachWidth;
+
+                left = itemPosition % spanCount * dl;
+                right = eachWidth - left;
+                bottom = mDividerHeight;
+                if (isLastRow){
+                    bottom = 0;
                 }
+                outRect.set(left, top, right, bottom);
+
                 break;
             case VERTICAL_LIST:
                 childCount -= 1;
