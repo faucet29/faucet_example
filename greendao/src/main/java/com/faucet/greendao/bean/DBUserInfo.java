@@ -19,7 +19,7 @@ import com.faucet.greendao.dao.DBValidationMessageDao;
  * Entity mapped to table "DBUSER_INFO".
  */
 @Entity(active = true)
-public class DBUserInfo {
+public class DBUserInfo implements java.io.Serializable {
 
     @Id
     private Long account_uid;

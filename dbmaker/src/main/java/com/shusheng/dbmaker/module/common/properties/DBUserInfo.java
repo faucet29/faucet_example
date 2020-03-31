@@ -15,8 +15,8 @@ public class DBUserInfo extends DBProperty {
     public void create(Schema schema) {
         Entity entity = schema.addEntity("DBUserInfo");
         entity.implementsSerializable();
-        entity.implementsInterface("ModelUtils.SoreModelMethod");
-        entity.setSuperclass("BasicRequest");
+//        entity.implementsInterface("ModelUtils.SoreModelMethod");
+//        entity.setSuperclass("BasicRequest");
         entity.setConstructors(false);
 //        entity.addIdProperty().autoincrement();
         entity.addLongProperty("account_uid").primaryKey().getProperty();

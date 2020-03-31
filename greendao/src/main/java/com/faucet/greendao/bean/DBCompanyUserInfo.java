@@ -19,7 +19,7 @@ import com.faucet.greendao.dao.DBCompanyUserTelInfoDao;
  * Entity mapped to table "DBCOMPANY_USER_INFO".
  */
 @Entity(active = true)
-public class DBCompanyUserInfo {
+public class DBCompanyUserInfo implements java.io.Serializable {
 
     @Id
     private Long uid;
