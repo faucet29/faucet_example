@@ -26,32 +26,33 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
     public static class Properties {
         public final static Property Account_uid = new Property(0, Long.class, "account_uid", true, "ACCOUNT_UID");
         public final static Property Fid = new Property(1, Long.class, "fid", false, "FID");
-        public final static Property Username = new Property(2, String.class, "username", false, "USERNAME");
-        public final static Property Avatar = new Property(3, String.class, "avatar", false, "AVATAR");
-        public final static Property Sex = new Property(4, Integer.class, "sex", false, "SEX");
-        public final static Property Birthday = new Property(5, String.class, "birthday", false, "BIRTHDAY");
-        public final static Property Education = new Property(6, String.class, "education", false, "EDUCATION");
-        public final static Property Work_date = new Property(7, String.class, "work_date", false, "WORK_DATE");
-        public final static Property Emergency_contact_person = new Property(8, String.class, "emergency_contact_person", false, "EMERGENCY_CONTACT_PERSON");
-        public final static Property Emergency_contact_mobile = new Property(9, String.class, "emergency_contact_mobile", false, "EMERGENCY_CONTACT_MOBILE");
-        public final static Property Is_marry = new Property(10, Integer.class, "is_marry", false, "IS_MARRY");
-        public final static Property Children_num = new Property(11, Integer.class, "children_num", false, "CHILDREN_NUM");
-        public final static Property First_letter = new Property(12, String.class, "first_letter", false, "FIRST_LETTER");
-        public final static Property Header_letters = new Property(13, String.class, "header_letters", false, "HEADER_LETTERS");
-        public final static Property Pinyin = new Property(14, String.class, "pinyin", false, "PINYIN");
-        public final static Property Realname = new Property(15, String.class, "realname", false, "REALNAME");
-        public final static Property Real_first_letter = new Property(16, String.class, "real_first_letter", false, "REAL_FIRST_LETTER");
-        public final static Property Real_header_letters = new Property(17, String.class, "real_header_letters", false, "REAL_HEADER_LETTERS");
-        public final static Property Real_pinyin = new Property(18, String.class, "real_pinyin", false, "REAL_PINYIN");
-        public final static Property Source_first_letter = new Property(19, String.class, "source_first_letter", false, "SOURCE_FIRST_LETTER");
-        public final static Property Source_header_letters = new Property(20, String.class, "source_header_letters", false, "SOURCE_HEADER_LETTERS");
-        public final static Property Source_pinyin = new Property(21, String.class, "source_pinyin", false, "SOURCE_PINYIN");
-        public final static Property Blood_type = new Property(22, Integer.class, "blood_type", false, "BLOOD_TYPE");
-        public final static Property Is_show = new Property(23, Integer.class, "is_show", false, "IS_SHOW");
-        public final static Property Action_time = new Property(24, Long.class, "action_time", false, "ACTION_TIME");
-        public final static Property Relate_type = new Property(25, Integer.class, "relate_type", false, "RELATE_TYPE");
-        public final static Property Re_id = new Property(26, Long.class, "re_id", false, "RE_ID");
-        public final static Property User_id = new Property(27, Long.class, "user_id", false, "USER_ID");
+        public final static Property Qyt_account = new Property(2, Long.class, "qyt_account", false, "QYT_ACCOUNT");
+        public final static Property Username = new Property(3, String.class, "username", false, "USERNAME");
+        public final static Property Avatar = new Property(4, String.class, "avatar", false, "AVATAR");
+        public final static Property Sex = new Property(5, Integer.class, "sex", false, "SEX");
+        public final static Property Birthday = new Property(6, String.class, "birthday", false, "BIRTHDAY");
+        public final static Property Education = new Property(7, String.class, "education", false, "EDUCATION");
+        public final static Property Work_date = new Property(8, String.class, "work_date", false, "WORK_DATE");
+        public final static Property Emergency_contact_person = new Property(9, String.class, "emergency_contact_person", false, "EMERGENCY_CONTACT_PERSON");
+        public final static Property Emergency_contact_mobile = new Property(10, String.class, "emergency_contact_mobile", false, "EMERGENCY_CONTACT_MOBILE");
+        public final static Property Is_marry = new Property(11, Integer.class, "is_marry", false, "IS_MARRY");
+        public final static Property Children_num = new Property(12, Integer.class, "children_num", false, "CHILDREN_NUM");
+        public final static Property First_letter = new Property(13, String.class, "first_letter", false, "FIRST_LETTER");
+        public final static Property Header_letters = new Property(14, String.class, "header_letters", false, "HEADER_LETTERS");
+        public final static Property Pinyin = new Property(15, String.class, "pinyin", false, "PINYIN");
+        public final static Property Realname = new Property(16, String.class, "realname", false, "REALNAME");
+        public final static Property Real_first_letter = new Property(17, String.class, "real_first_letter", false, "REAL_FIRST_LETTER");
+        public final static Property Real_header_letters = new Property(18, String.class, "real_header_letters", false, "REAL_HEADER_LETTERS");
+        public final static Property Real_pinyin = new Property(19, String.class, "real_pinyin", false, "REAL_PINYIN");
+        public final static Property Blood_type = new Property(20, Integer.class, "blood_type", false, "BLOOD_TYPE");
+        public final static Property Is_show = new Property(21, Integer.class, "is_show", false, "IS_SHOW");
+        public final static Property Action_time = new Property(22, Long.class, "action_time", false, "ACTION_TIME");
+        public final static Property Relate_type = new Property(23, Integer.class, "relate_type", false, "RELATE_TYPE");
+        public final static Property Re_id = new Property(24, Long.class, "re_id", false, "RE_ID");
+        public final static Property User_id = new Property(25, Long.class, "user_id", false, "USER_ID");
+        public final static Property Is_delete = new Property(26, Integer.class, "is_delete", false, "IS_DELETE");
+        public final static Property Is_me = new Property(27, Integer.class, "is_me", false, "IS_ME");
+        public final static Property Friend_account_uid = new Property(28, Long.class, "friend_account_uid", false, "FRIEND_ACCOUNT_UID");
     }
 
     private DaoSession daoSession;
@@ -72,35 +73,34 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"DBUSER_INFO\" (" + //
                 "\"ACCOUNT_UID\" INTEGER PRIMARY KEY ," + // 0: account_uid
                 "\"FID\" INTEGER," + // 1: fid
-                "\"USERNAME\" TEXT," + // 2: username
-                "\"AVATAR\" TEXT," + // 3: avatar
-                "\"SEX\" INTEGER," + // 4: sex
-                "\"BIRTHDAY\" TEXT," + // 5: birthday
-                "\"EDUCATION\" TEXT," + // 6: education
-                "\"WORK_DATE\" TEXT," + // 7: work_date
-                "\"EMERGENCY_CONTACT_PERSON\" TEXT," + // 8: emergency_contact_person
-                "\"EMERGENCY_CONTACT_MOBILE\" TEXT," + // 9: emergency_contact_mobile
-                "\"IS_MARRY\" INTEGER," + // 10: is_marry
-                "\"CHILDREN_NUM\" INTEGER," + // 11: children_num
-                "\"FIRST_LETTER\" TEXT," + // 12: first_letter
-                "\"HEADER_LETTERS\" TEXT," + // 13: header_letters
-                "\"PINYIN\" TEXT," + // 14: pinyin
-                "\"REALNAME\" TEXT," + // 15: realname
-                "\"REAL_FIRST_LETTER\" TEXT," + // 16: real_first_letter
-                "\"REAL_HEADER_LETTERS\" TEXT," + // 17: real_header_letters
-                "\"REAL_PINYIN\" TEXT," + // 18: real_pinyin
-                "\"SOURCE_FIRST_LETTER\" TEXT," + // 19: source_first_letter
-                "\"SOURCE_HEADER_LETTERS\" TEXT," + // 20: source_header_letters
-                "\"SOURCE_PINYIN\" TEXT," + // 21: source_pinyin
-                "\"BLOOD_TYPE\" INTEGER," + // 22: blood_type
-                "\"IS_SHOW\" INTEGER," + // 23: is_show
-                "\"ACTION_TIME\" INTEGER," + // 24: action_time
-                "\"RELATE_TYPE\" INTEGER," + // 25: relate_type
-                "\"RE_ID\" INTEGER," + // 26: re_id
-                "\"USER_ID\" INTEGER);"); // 27: user_id
+                "\"QYT_ACCOUNT\" INTEGER," + // 2: qyt_account
+                "\"USERNAME\" TEXT," + // 3: username
+                "\"AVATAR\" TEXT," + // 4: avatar
+                "\"SEX\" INTEGER," + // 5: sex
+                "\"BIRTHDAY\" TEXT," + // 6: birthday
+                "\"EDUCATION\" TEXT," + // 7: education
+                "\"WORK_DATE\" TEXT," + // 8: work_date
+                "\"EMERGENCY_CONTACT_PERSON\" TEXT," + // 9: emergency_contact_person
+                "\"EMERGENCY_CONTACT_MOBILE\" TEXT," + // 10: emergency_contact_mobile
+                "\"IS_MARRY\" INTEGER," + // 11: is_marry
+                "\"CHILDREN_NUM\" INTEGER," + // 12: children_num
+                "\"FIRST_LETTER\" TEXT," + // 13: first_letter
+                "\"HEADER_LETTERS\" TEXT," + // 14: header_letters
+                "\"PINYIN\" TEXT," + // 15: pinyin
+                "\"REALNAME\" TEXT," + // 16: realname
+                "\"REAL_FIRST_LETTER\" TEXT," + // 17: real_first_letter
+                "\"REAL_HEADER_LETTERS\" TEXT," + // 18: real_header_letters
+                "\"REAL_PINYIN\" TEXT," + // 19: real_pinyin
+                "\"BLOOD_TYPE\" INTEGER," + // 20: blood_type
+                "\"IS_SHOW\" INTEGER," + // 21: is_show
+                "\"ACTION_TIME\" INTEGER," + // 22: action_time
+                "\"RELATE_TYPE\" INTEGER," + // 23: relate_type
+                "\"RE_ID\" INTEGER," + // 24: re_id
+                "\"USER_ID\" INTEGER," + // 25: user_id
+                "\"IS_DELETE\" INTEGER," + // 26: is_delete
+                "\"IS_ME\" INTEGER," + // 27: is_me
+                "\"FRIEND_ACCOUNT_UID\" INTEGER);"); // 28: friend_account_uid
         // Add Indexes
-        db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_FID ON \"DBUSER_INFO\"" +
-                " (\"FID\");");
         db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_USERNAME ON \"DBUSER_INFO\"" +
                 " (\"USERNAME\");");
         db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_FIRST_LETTER ON \"DBUSER_INFO\"" +
@@ -117,12 +117,6 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
                 " (\"REAL_HEADER_LETTERS\");");
         db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_REAL_PINYIN ON \"DBUSER_INFO\"" +
                 " (\"REAL_PINYIN\");");
-        db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_SOURCE_FIRST_LETTER ON \"DBUSER_INFO\"" +
-                " (\"SOURCE_FIRST_LETTER\");");
-        db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_SOURCE_HEADER_LETTERS ON \"DBUSER_INFO\"" +
-                " (\"SOURCE_HEADER_LETTERS\");");
-        db.execSQL("CREATE INDEX " + constraint + "IDX_DBUSER_INFO_SOURCE_PINYIN ON \"DBUSER_INFO\"" +
-                " (\"SOURCE_PINYIN\");");
     }
 
     /** Drops the underlying database table. */
@@ -145,134 +139,139 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
             stmt.bindLong(2, fid);
         }
  
+        Long qyt_account = entity.getQyt_account();
+        if (qyt_account != null) {
+            stmt.bindLong(3, qyt_account);
+        }
+ 
         String username = entity.getUsername();
         if (username != null) {
-            stmt.bindString(3, username);
+            stmt.bindString(4, username);
         }
  
         String avatar = entity.getAvatar();
         if (avatar != null) {
-            stmt.bindString(4, avatar);
+            stmt.bindString(5, avatar);
         }
  
         Integer sex = entity.getSex();
         if (sex != null) {
-            stmt.bindLong(5, sex);
+            stmt.bindLong(6, sex);
         }
  
         String birthday = entity.getBirthday();
         if (birthday != null) {
-            stmt.bindString(6, birthday);
+            stmt.bindString(7, birthday);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(7, education);
+            stmt.bindString(8, education);
         }
  
         String work_date = entity.getWork_date();
         if (work_date != null) {
-            stmt.bindString(8, work_date);
+            stmt.bindString(9, work_date);
         }
  
         String emergency_contact_person = entity.getEmergency_contact_person();
         if (emergency_contact_person != null) {
-            stmt.bindString(9, emergency_contact_person);
+            stmt.bindString(10, emergency_contact_person);
         }
  
         String emergency_contact_mobile = entity.getEmergency_contact_mobile();
         if (emergency_contact_mobile != null) {
-            stmt.bindString(10, emergency_contact_mobile);
+            stmt.bindString(11, emergency_contact_mobile);
         }
  
         Integer is_marry = entity.getIs_marry();
         if (is_marry != null) {
-            stmt.bindLong(11, is_marry);
+            stmt.bindLong(12, is_marry);
         }
  
         Integer children_num = entity.getChildren_num();
         if (children_num != null) {
-            stmt.bindLong(12, children_num);
+            stmt.bindLong(13, children_num);
         }
  
         String first_letter = entity.getFirst_letter();
         if (first_letter != null) {
-            stmt.bindString(13, first_letter);
+            stmt.bindString(14, first_letter);
         }
  
         String header_letters = entity.getHeader_letters();
         if (header_letters != null) {
-            stmt.bindString(14, header_letters);
+            stmt.bindString(15, header_letters);
         }
  
         String pinyin = entity.getPinyin();
         if (pinyin != null) {
-            stmt.bindString(15, pinyin);
+            stmt.bindString(16, pinyin);
         }
  
         String realname = entity.getRealname();
         if (realname != null) {
-            stmt.bindString(16, realname);
+            stmt.bindString(17, realname);
         }
  
         String real_first_letter = entity.getReal_first_letter();
         if (real_first_letter != null) {
-            stmt.bindString(17, real_first_letter);
+            stmt.bindString(18, real_first_letter);
         }
  
         String real_header_letters = entity.getReal_header_letters();
         if (real_header_letters != null) {
-            stmt.bindString(18, real_header_letters);
+            stmt.bindString(19, real_header_letters);
         }
  
         String real_pinyin = entity.getReal_pinyin();
         if (real_pinyin != null) {
-            stmt.bindString(19, real_pinyin);
-        }
- 
-        String source_first_letter = entity.getSource_first_letter();
-        if (source_first_letter != null) {
-            stmt.bindString(20, source_first_letter);
-        }
- 
-        String source_header_letters = entity.getSource_header_letters();
-        if (source_header_letters != null) {
-            stmt.bindString(21, source_header_letters);
-        }
- 
-        String source_pinyin = entity.getSource_pinyin();
-        if (source_pinyin != null) {
-            stmt.bindString(22, source_pinyin);
+            stmt.bindString(20, real_pinyin);
         }
  
         Integer blood_type = entity.getBlood_type();
         if (blood_type != null) {
-            stmt.bindLong(23, blood_type);
+            stmt.bindLong(21, blood_type);
         }
  
         Integer is_show = entity.getIs_show();
         if (is_show != null) {
-            stmt.bindLong(24, is_show);
+            stmt.bindLong(22, is_show);
         }
  
         Long action_time = entity.getAction_time();
         if (action_time != null) {
-            stmt.bindLong(25, action_time);
+            stmt.bindLong(23, action_time);
         }
  
         Integer relate_type = entity.getRelate_type();
         if (relate_type != null) {
-            stmt.bindLong(26, relate_type);
+            stmt.bindLong(24, relate_type);
         }
  
         Long re_id = entity.getRe_id();
         if (re_id != null) {
-            stmt.bindLong(27, re_id);
+            stmt.bindLong(25, re_id);
         }
  
         Long user_id = entity.getUser_id();
         if (user_id != null) {
-            stmt.bindLong(28, user_id);
+            stmt.bindLong(26, user_id);
+        }
+ 
+        Integer is_delete = entity.getIs_delete();
+        if (is_delete != null) {
+            stmt.bindLong(27, is_delete);
+        }
+ 
+        Integer is_me = entity.getIs_me();
+        if (is_me != null) {
+            stmt.bindLong(28, is_me);
+        }
+ 
+        Long friend_account_uid = entity.getFriend_account_uid();
+        if (friend_account_uid != null) {
+            stmt.bindLong(29, friend_account_uid);
         }
     }
 
@@ -290,134 +289,139 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
             stmt.bindLong(2, fid);
         }
  
+        Long qyt_account = entity.getQyt_account();
+        if (qyt_account != null) {
+            stmt.bindLong(3, qyt_account);
+        }
+ 
         String username = entity.getUsername();
         if (username != null) {
-            stmt.bindString(3, username);
+            stmt.bindString(4, username);
         }
  
         String avatar = entity.getAvatar();
         if (avatar != null) {
-            stmt.bindString(4, avatar);
+            stmt.bindString(5, avatar);
         }
  
         Integer sex = entity.getSex();
         if (sex != null) {
-            stmt.bindLong(5, sex);
+            stmt.bindLong(6, sex);
         }
  
         String birthday = entity.getBirthday();
         if (birthday != null) {
-            stmt.bindString(6, birthday);
+            stmt.bindString(7, birthday);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(7, education);
+            stmt.bindString(8, education);
         }
  
         String work_date = entity.getWork_date();
         if (work_date != null) {
-            stmt.bindString(8, work_date);
+            stmt.bindString(9, work_date);
         }
  
         String emergency_contact_person = entity.getEmergency_contact_person();
         if (emergency_contact_person != null) {
-            stmt.bindString(9, emergency_contact_person);
+            stmt.bindString(10, emergency_contact_person);
         }
  
         String emergency_contact_mobile = entity.getEmergency_contact_mobile();
         if (emergency_contact_mobile != null) {
-            stmt.bindString(10, emergency_contact_mobile);
+            stmt.bindString(11, emergency_contact_mobile);
         }
  
         Integer is_marry = entity.getIs_marry();
         if (is_marry != null) {
-            stmt.bindLong(11, is_marry);
+            stmt.bindLong(12, is_marry);
         }
  
         Integer children_num = entity.getChildren_num();
         if (children_num != null) {
-            stmt.bindLong(12, children_num);
+            stmt.bindLong(13, children_num);
         }
  
         String first_letter = entity.getFirst_letter();
         if (first_letter != null) {
-            stmt.bindString(13, first_letter);
+            stmt.bindString(14, first_letter);
         }
  
         String header_letters = entity.getHeader_letters();
         if (header_letters != null) {
-            stmt.bindString(14, header_letters);
+            stmt.bindString(15, header_letters);
         }
  
         String pinyin = entity.getPinyin();
         if (pinyin != null) {
-            stmt.bindString(15, pinyin);
+            stmt.bindString(16, pinyin);
         }
  
         String realname = entity.getRealname();
         if (realname != null) {
-            stmt.bindString(16, realname);
+            stmt.bindString(17, realname);
         }
  
         String real_first_letter = entity.getReal_first_letter();
         if (real_first_letter != null) {
-            stmt.bindString(17, real_first_letter);
+            stmt.bindString(18, real_first_letter);
         }
  
         String real_header_letters = entity.getReal_header_letters();
         if (real_header_letters != null) {
-            stmt.bindString(18, real_header_letters);
+            stmt.bindString(19, real_header_letters);
         }
  
         String real_pinyin = entity.getReal_pinyin();
         if (real_pinyin != null) {
-            stmt.bindString(19, real_pinyin);
-        }
- 
-        String source_first_letter = entity.getSource_first_letter();
-        if (source_first_letter != null) {
-            stmt.bindString(20, source_first_letter);
-        }
- 
-        String source_header_letters = entity.getSource_header_letters();
-        if (source_header_letters != null) {
-            stmt.bindString(21, source_header_letters);
-        }
- 
-        String source_pinyin = entity.getSource_pinyin();
-        if (source_pinyin != null) {
-            stmt.bindString(22, source_pinyin);
+            stmt.bindString(20, real_pinyin);
         }
  
         Integer blood_type = entity.getBlood_type();
         if (blood_type != null) {
-            stmt.bindLong(23, blood_type);
+            stmt.bindLong(21, blood_type);
         }
  
         Integer is_show = entity.getIs_show();
         if (is_show != null) {
-            stmt.bindLong(24, is_show);
+            stmt.bindLong(22, is_show);
         }
  
         Long action_time = entity.getAction_time();
         if (action_time != null) {
-            stmt.bindLong(25, action_time);
+            stmt.bindLong(23, action_time);
         }
  
         Integer relate_type = entity.getRelate_type();
         if (relate_type != null) {
-            stmt.bindLong(26, relate_type);
+            stmt.bindLong(24, relate_type);
         }
  
         Long re_id = entity.getRe_id();
         if (re_id != null) {
-            stmt.bindLong(27, re_id);
+            stmt.bindLong(25, re_id);
         }
  
         Long user_id = entity.getUser_id();
         if (user_id != null) {
-            stmt.bindLong(28, user_id);
+            stmt.bindLong(26, user_id);
+        }
+ 
+        Integer is_delete = entity.getIs_delete();
+        if (is_delete != null) {
+            stmt.bindLong(27, is_delete);
+        }
+ 
+        Integer is_me = entity.getIs_me();
+        if (is_me != null) {
+            stmt.bindLong(28, is_me);
+        }
+ 
+        Long friend_account_uid = entity.getFriend_account_uid();
+        if (friend_account_uid != null) {
+            stmt.bindLong(29, friend_account_uid);
         }
     }
 
@@ -443,32 +447,33 @@ public class DBUserInfoDao extends AbstractDao<DBUserInfo, Long> {
     public void readEntity(Cursor cursor, DBUserInfo entity, int offset) {
         entity.setAccount_uid(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setFid(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setUsername(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setAvatar(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setSex(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setBirthday(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setEducation(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setWork_date(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setEmergency_contact_person(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setEmergency_contact_mobile(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setIs_marry(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
-        entity.setChildren_num(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
-        entity.setFirst_letter(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setHeader_letters(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setPinyin(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setRealname(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setReal_first_letter(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setReal_header_letters(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setReal_pinyin(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setSource_first_letter(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setSource_header_letters(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setSource_pinyin(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setBlood_type(cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22));
-        entity.setIs_show(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
-        entity.setAction_time(cursor.isNull(offset + 24) ? null : cursor.getLong(offset + 24));
-        entity.setRelate_type(cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25));
-        entity.setRe_id(cursor.isNull(offset + 26) ? null : cursor.getLong(offset + 26));
-        entity.setUser_id(cursor.isNull(offset + 27) ? null : cursor.getLong(offset + 27));
+        entity.setQyt_account(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setUsername(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setAvatar(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setSex(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setBirthday(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setEducation(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setWork_date(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setEmergency_contact_person(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setEmergency_contact_mobile(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setIs_marry(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
+        entity.setChildren_num(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
+        entity.setFirst_letter(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setHeader_letters(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setPinyin(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setRealname(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setReal_first_letter(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setReal_header_letters(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setReal_pinyin(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setBlood_type(cursor.isNull(offset + 20) ? null : cursor.getInt(offset + 20));
+        entity.setIs_show(cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21));
+        entity.setAction_time(cursor.isNull(offset + 22) ? null : cursor.getLong(offset + 22));
+        entity.setRelate_type(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
+        entity.setRe_id(cursor.isNull(offset + 24) ? null : cursor.getLong(offset + 24));
+        entity.setUser_id(cursor.isNull(offset + 25) ? null : cursor.getLong(offset + 25));
+        entity.setIs_delete(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
+        entity.setIs_me(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
+        entity.setFriend_account_uid(cursor.isNull(offset + 28) ? null : cursor.getLong(offset + 28));
      }
     
     @Override

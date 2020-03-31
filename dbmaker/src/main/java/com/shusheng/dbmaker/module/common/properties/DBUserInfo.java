@@ -20,7 +20,8 @@ public class DBUserInfo extends DBProperty {
         entity.setConstructors(false);
 //        entity.addIdProperty().autoincrement();
         entity.addLongProperty("account_uid").primaryKey().getProperty();
-        entity.addLongProperty("fid").index();//好友id
+        entity.addLongProperty("fid");//好友id
+        entity.addLongProperty("qyt_account");
         entity.addStringProperty("username").index();//人员名称 不可更改
         entity.addStringProperty("avatar"); //头像
         entity.addIntProperty("sex"); //性别
@@ -38,15 +39,15 @@ public class DBUserInfo extends DBProperty {
         entity.addStringProperty("real_first_letter").index();
         entity.addStringProperty("real_header_letters").index();
         entity.addStringProperty("real_pinyin").index();
-        entity.addStringProperty("source_first_letter").index();//真实用于排序的
-        entity.addStringProperty("source_header_letters").index();//真实用于排序的
-        entity.addStringProperty("source_pinyin").index();//真实用于排序的
         entity.addIntProperty("blood_type");
         entity.addIntProperty("is_show");
         entity.addLongProperty("action_time");
-        entity.addIntProperty("relate_type");
+        entity.addIntProperty("relate_type");//1-待通过, 2-拒绝通过, 3-已通过_即好友, 4-已解除_即删除,5-拉黑
         entity.addLongProperty("re_id");
         entity.addLongProperty("user_id");
+        entity.addIntProperty("is_delete"); //是否删除
+        entity.addIntProperty("is_me");//1.单方加好友 2.双方互加过
+        entity.addLongProperty("friend_account_uid");//被加人的
 
         Entity messageEntity = schema.addEntity("DBValidationMessage");
         messageEntity.implementsSerializable();

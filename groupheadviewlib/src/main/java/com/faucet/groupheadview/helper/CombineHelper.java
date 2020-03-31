@@ -77,7 +77,7 @@ public class CombineHelper {
         });
         for (int i = 0; i < builder.count; i++) {
             final int finalI = i;
-            if (builder.urls[i].contains("http://") || builder.urls[i].contains("https://")) {
+            if (builder.urls[i].contains("http://") || builder.urls[i].contains("https://") || builder.urls[i].contains("file://")) {
                 GlideApp.with(builder.context)
                         .asBitmap()
                         .load(builder.urls[i])

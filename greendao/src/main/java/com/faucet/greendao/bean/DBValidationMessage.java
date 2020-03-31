@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.*;
  * Entity mapped to table "DBVALIDATION_MESSAGE".
  */
 @Entity
-public class DBValidationMessage implements java.io.Serializable {
+public class DBValidationMessage {
 
     @Id(autoincrement = true)
     private Long id;

@@ -14,5 +14,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+        CommonDatabaseManager stageDBManager = new CommonDatabaseManager();
+        stageDBManager.initConnection();
     }
 }

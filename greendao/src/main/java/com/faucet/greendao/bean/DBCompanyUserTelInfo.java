@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.*;
  * Entity mapped to table "DBCOMPANY_USER_TEL_INFO".
  */
 @Entity
-public class DBCompanyUserTelInfo implements java.io.Serializable {
+public class DBCompanyUserTelInfo {
 
     @Id(autoincrement = true)
     private Long id;

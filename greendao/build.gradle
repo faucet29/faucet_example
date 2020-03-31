@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
 
 def configInfo = rootProject.ext.android
 def libraries = rootProject.ext.dependencies

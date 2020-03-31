@@ -19,13 +19,12 @@ import com.faucet.greendao.dao.DBValidationMessageDao;
  * Entity mapped to table "DBUSER_INFO".
  */
 @Entity(active = true)
-public class DBUserInfo extends BasicRequest  implements java.io.Serializable, ModelUtils.SoreModelMethod {
+public class DBUserInfo {
 
     @Id
     private Long account_uid;
-
-    @Index
     private Long fid;
+    private Long qyt_account;
 
     @Index
     private String username;
@@ -59,21 +58,15 @@ public class DBUserInfo extends BasicRequest  implements java.io.Serializable, M
 
     @Index
     private String real_pinyin;
-
-    @Index
-    private String source_first_letter;
-
-    @Index
-    private String source_header_letters;
-
-    @Index
-    private String source_pinyin;
     private Integer blood_type;
     private Integer is_show;
     private Long action_time;
     private Integer relate_type;
     private Long re_id;
     private Long user_id;
+    private Integer is_delete;
+    private Integer is_me;
+    private Long friend_account_uid;
 
     /** Used to resolve relations */
     @Generated
@@ -118,6 +111,14 @@ public class DBUserInfo extends BasicRequest  implements java.io.Serializable, M
 
     public void setFid(Long fid) {
         this.fid = fid;
+    }
+
+    public Long getQyt_account() {
+        return qyt_account;
+    }
+
+    public void setQyt_account(Long qyt_account) {
+        this.qyt_account = qyt_account;
     }
 
     public String getUsername() {
@@ -256,30 +257,6 @@ public class DBUserInfo extends BasicRequest  implements java.io.Serializable, M
         this.real_pinyin = real_pinyin;
     }
 
-    public String getSource_first_letter() {
-        return source_first_letter;
-    }
-
-    public void setSource_first_letter(String source_first_letter) {
-        this.source_first_letter = source_first_letter;
-    }
-
-    public String getSource_header_letters() {
-        return source_header_letters;
-    }
-
-    public void setSource_header_letters(String source_header_letters) {
-        this.source_header_letters = source_header_letters;
-    }
-
-    public String getSource_pinyin() {
-        return source_pinyin;
-    }
-
-    public void setSource_pinyin(String source_pinyin) {
-        this.source_pinyin = source_pinyin;
-    }
-
     public Integer getBlood_type() {
         return blood_type;
     }
@@ -326,6 +303,30 @@ public class DBUserInfo extends BasicRequest  implements java.io.Serializable, M
 
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
+    }
+
+    public Integer getIs_delete() {
+        return is_delete;
+    }
+
+    public void setIs_delete(Integer is_delete) {
+        this.is_delete = is_delete;
+    }
+
+    public Integer getIs_me() {
+        return is_me;
+    }
+
+    public void setIs_me(Integer is_me) {
+        this.is_me = is_me;
+    }
+
+    public Long getFriend_account_uid() {
+        return friend_account_uid;
+    }
+
+    public void setFriend_account_uid(Long friend_account_uid) {
+        this.friend_account_uid = friend_account_uid;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

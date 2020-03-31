@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 public class CommonUtil
 {
-    public static String COMMON_MODULE = "common_11";
     public static String getFileName(String filename, String extension)
     {
         long companyId = 123;

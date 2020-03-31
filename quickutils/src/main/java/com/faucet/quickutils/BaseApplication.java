@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 
 import com.bumptech.glide.request.target.ViewTarget;
-import com.faucet.quickutils.core.constant.AppConstant;
 import com.faucet.quickutils.utils.LoggerInterceptor;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -21,7 +20,7 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new LoggerInterceptor("OkHttpUtils", AppConstant.isDebug))
+                .addInterceptor(new LoggerInterceptor("OkHttpUtils", isDebug()))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置
@@ -36,5 +35,9 @@ public class BaseApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this); // Enable MultiDex.
+    }
+
+    protected boolean isDebug() {
+        return false;
     }
 }
