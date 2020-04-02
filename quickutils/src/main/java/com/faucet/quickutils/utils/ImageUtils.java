@@ -7,6 +7,7 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Size;
 import androidx.fragment.app.FragmentActivity;
 import android.widget.ImageView;
 
@@ -120,16 +121,19 @@ public abstract class ImageUtils {
      * @param context
      * @param iv
      * @param url
-     * @param corner
+     * @param corner 单位dp
      */
     public void displayRoundedCornersImage (Context context, ImageView iv, String url, int corner) {
         if (!isContextError(context)) {
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder(), iv.getWidth(), iv.getHeight());
+            circleRoundDrawable.setRoundAngle(SizeUtils.dp2px(context, corner));
             RequestOptions options = new RequestOptions().transform(new GlideRoundTransform(context, corner));
             GlideApp.with(context)
-                    .load(url + "?x-oss-process=image/resize,p_70")
+                    .load(url + "?x-oss-process=image/resize,p_100")
                     .apply(options)
-                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
-//                    .placeholder(setPlaceHolder())
+                    .thumbnail(GlideApp.with(context).load(url + "?x-oss-process=image/resize,p_30").apply(options))
+                    .placeholder(circleRoundDrawable)
+                    .error(circleRoundDrawable)
                     .into(iv);
         }
     }
@@ -139,18 +143,21 @@ public abstract class ImageUtils {
      * @param context
      * @param iv
      * @param url
-     * @param corner
+     * @param corner 单位dp
      */
     public void displayHalfRoundedCornersImage (Context context, ImageView iv, String url, int corner) {
         if (!isContextError(context)){
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder(), iv.getWidth(), iv.getHeight());
+            circleRoundDrawable.setRoundAngle(SizeUtils.dp2px(context, corner));
             GlideHalfRoundTransform glideHalfRoundTransform = new GlideHalfRoundTransform(context, corner);
             glideHalfRoundTransform.setExceptCorner(false, false, true, true);
             RequestOptions options = new RequestOptions().transform(glideHalfRoundTransform);
             GlideApp.with(context)
-                    .load(url + "?x-oss-process=image/resize,p_70")
+                    .load(url + "?x-oss-process=image/resize,p_100")
                     .apply(options)
-                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
-//                    .placeholder(setPlaceHolder())
+                    .thumbnail(GlideApp.with(context).load(url + "?x-oss-process=image/resize,p_30").apply(options))
+                    .placeholder(circleRoundDrawable)
+                    .error(circleRoundDrawable)
                     .into(iv);
         }
     }
@@ -163,11 +170,14 @@ public abstract class ImageUtils {
      */
     public void displayCircleImage (Context context, ImageView iv, String url) {
         if (!isContextError(context)) {
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder());
+            circleRoundDrawable.setType(2);
             RequestOptions options = new RequestOptions().transform(new GlideCircleTransform(context));
             GlideApp.with(context)
                     .load(url)
-                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
-//                    .placeholder(setPlaceHolder())
+                    .thumbnail(GlideApp.with(context).load(url + "?x-oss-process=image/resize,p_30").apply(options))
+                    .placeholder(circleRoundDrawable)
+                    .error(circleRoundDrawable)
                     .apply(options)
                     .into(iv);
         }
@@ -181,11 +191,13 @@ public abstract class ImageUtils {
      */
     public void displayCircleImageWithBorder (Context context, ImageView iv, String url, int borderWidth, int borderColor) {
         if (!isContextError(context)) {
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder());
+            circleRoundDrawable.setType(2);
             RequestOptions options = new RequestOptions().transform(new GlideCircleTransform(context, borderWidth, borderColor));
             GlideApp.with(context)
                     .load(url)
-                    .thumbnail(GlideApp.with(context).load(setPlaceHolder()).apply(options))
-//                    .placeholder(setPlaceHolder())
+                    .thumbnail(GlideApp.with(context).load(url + "?x-oss-process=image/resize,p_30").apply(options))
+                    .placeholder(circleRoundDrawable)
                     .apply(options)
                     .into(iv);
         }
