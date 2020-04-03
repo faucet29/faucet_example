@@ -124,9 +124,22 @@ public abstract class ImageUtils {
      * @param corner 单位dp
      */
     public void displayRoundedCornersImage (Context context, ImageView iv, String url, int corner) {
+        displayRoundedCornersImage(context, iv, url, corner, 0);
+    }
+
+    /**
+     * 当PlaceHolder图非圆角时使用
+     * @param context
+     * @param iv
+     * @param url
+     * @param corner 单位dp
+     * @param cornerPercent 圆角占placeholder图宽度百分比 0f-1f
+     */
+    public void displayRoundedCornersImage (Context context, ImageView iv, String url, int corner, float cornerPercent) {
         if (!isContextError(context)) {
-            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder(), iv.getWidth(), iv.getHeight());
-            circleRoundDrawable.setRoundAngle(SizeUtils.dp2px(context, corner));
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder());
+            circleRoundDrawable.setRoundAngle(cornerPercent);
+            circleRoundDrawable.setType(1);
             RequestOptions options = new RequestOptions().transform(new GlideRoundTransform(context, corner));
             GlideApp.with(context)
                     .load(url + "?x-oss-process=image/resize,p_100")
@@ -146,9 +159,22 @@ public abstract class ImageUtils {
      * @param corner 单位dp
      */
     public void displayHalfRoundedCornersImage (Context context, ImageView iv, String url, int corner) {
+        displayHalfRoundedCornersImage(context, iv, url, corner, 0);
+    }
+
+    /**
+     * 当PlaceHolder图非圆角时使用
+     * @param context
+     * @param iv
+     * @param url
+     * @param corner 单位dp
+     * @param cornerPercent 圆角占placeholder图宽度百分比 0f-1f
+     */
+    public void displayHalfRoundedCornersImage (Context context, ImageView iv, String url, int corner, float cornerPercent) {
         if (!isContextError(context)){
-            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder(), iv.getWidth(), iv.getHeight());
-            circleRoundDrawable.setRoundAngle(SizeUtils.dp2px(context, corner));
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder());
+            circleRoundDrawable.setRoundAngle(cornerPercent);
+            circleRoundDrawable.setType(1);
             GlideHalfRoundTransform glideHalfRoundTransform = new GlideHalfRoundTransform(context, corner);
             glideHalfRoundTransform.setExceptCorner(false, false, true, true);
             RequestOptions options = new RequestOptions().transform(glideHalfRoundTransform);

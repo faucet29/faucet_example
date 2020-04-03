@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
@@ -24,44 +23,18 @@ public class CircleRoundDrawable extends Drawable {
     private int radius;//半径
     private int roundAngle = 30;//默认圆角
     private Bitmap bitmap;//位图
-    private int type=1;//默认为圆形
-    private int width = 0;
-    private int height = 0;
+    private int type=2;//默认为圆形
 
     public static final int TYPE_Round = 1;
     public static final int Type_Circle = 2;
 
+
     public CircleRoundDrawable(Context context, int resID) {
-        init(BitmapFactory.decodeResource(context.getResources(), resID));
+        this(BitmapFactory.decodeResource(context.getResources(), resID));
     }
 
-    public CircleRoundDrawable(Bitmap oldbmp) {
-        init(oldbmp);
-    }
-
-    public CircleRoundDrawable(Context context, int resID, int newWidth, int newHeight) {
-        this.width = newWidth;
-        this.height = newHeight;
-        init(BitmapFactory.decodeResource(context.getResources(), resID));
-    }
-
-    public CircleRoundDrawable(Bitmap oldbmp, int newWidth, int newHeight) {
-        this.width = newWidth;
-        this.height = newHeight;
-        init(oldbmp);
-    }
-
-    private void init(Bitmap oldbmp) {
-        if (width != 0) {
-            Matrix matrix = new Matrix();
-            float scaleWidth = ((float) width / oldbmp.getWidth());
-            float scaleHeight = ((float) height / oldbmp.getHeight());
-            matrix.postScale(scaleWidth, scaleHeight);
-            this.bitmap = Bitmap.createBitmap(oldbmp, 0, 0, oldbmp.getWidth(), oldbmp.getHeight(),
-                    matrix, true);
-        } else {
-            this.bitmap = oldbmp;
-        }
+    public CircleRoundDrawable(Bitmap bitmap) {
+        this.bitmap = bitmap;
         paint = new Paint();
         paint.setAntiAlias(true);//抗锯齿
         paint.setDither(true);//抖动,不同屏幕尺的使用保证图片质量
@@ -76,10 +49,10 @@ public class CircleRoundDrawable extends Drawable {
 
     /***
      * 设置圆角
-     * @param roundAngle px
+     * @param roundAngle 百分比
      */
-    public void setRoundAngle(int roundAngle) {
-        this.roundAngle = roundAngle;
+    public void setRoundAngle(float roundAngle) {
+        this.roundAngle = (int) (roundAngle * getIntrinsicWidth());
     }
 
     public void setType(int type) {
