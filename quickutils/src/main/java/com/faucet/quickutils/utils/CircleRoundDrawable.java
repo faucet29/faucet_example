@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
@@ -30,19 +31,32 @@ public class CircleRoundDrawable extends Drawable {
 
 
     public CircleRoundDrawable(Context context, int resID) {
-        this(BitmapFactory.decodeResource(context.getResources(), resID));
+        this(BitmapFactory.decodeResource(context.getResources(), resID), 0, 0);
     }
 
-    public CircleRoundDrawable(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public CircleRoundDrawable(Context context, int resID, int w, int h) {
+        this(BitmapFactory.decodeResource(context.getResources(), resID), w, h);
+    }
+
+    public CircleRoundDrawable(Bitmap oldBitmap, int w, int h) {
+        if (w != 0) {
+            Matrix matrix = new Matrix();
+            float scaleWidth = ((float) w / oldBitmap.getWidth());
+            float scaleHeight = ((float) h / oldBitmap.getHeight());
+            matrix.postScale(scaleWidth, scaleHeight);
+            this.bitmap = Bitmap.createBitmap(oldBitmap, 0, 0, oldBitmap.getWidth(), oldBitmap.getHeight(),
+                    matrix, true);
+        } else {
+            this.bitmap = oldBitmap;
+        }
         paint = new Paint();
         paint.setAntiAlias(true);//抗锯齿
         paint.setDither(true);//抖动,不同屏幕尺的使用保证图片质量
 
         ///位图渲染器
-        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        BitmapShader bitmapShader = new BitmapShader(this.bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         paint.setShader(bitmapShader);
-        mWidth = Math.min(bitmap.getWidth(), bitmap.getHeight());
+        mWidth = Math.min(this.bitmap.getWidth(), this.bitmap.getHeight());
         //初始化半径
         radius = mWidth / 2;
     }
@@ -52,7 +66,7 @@ public class CircleRoundDrawable extends Drawable {
      * @param roundAngle 百分比
      */
     public void setRoundAngle(float roundAngle) {
-        this.roundAngle = (int) (roundAngle * getIntrinsicWidth());
+        this.roundAngle = (int) (roundAngle * this.bitmap.getWidth());
     }
 
     public void setType(int type) {

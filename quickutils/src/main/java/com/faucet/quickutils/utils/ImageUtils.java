@@ -152,6 +152,32 @@ public abstract class ImageUtils {
     }
 
     /**
+     * 当iv显示为centercrop,PlaceHolder会因为裁剪而失去圆角，故传入宽高压缩至适应iv宽高
+     * @param context
+     * @param iv
+     * @param url
+     * @param corner 单位dp
+     * @param cornerPercent 圆角占placeholder图宽度百分比 0f-1f
+     * @param w 设置placeholder压缩的宽度
+     * @param h 设置placeholder压缩的高度
+     */
+    public void displayRoundedCornersImage (Context context, ImageView iv, String url, int corner, float cornerPercent, int w, int h) {
+        if (!isContextError(context)) {
+            CircleRoundDrawable circleRoundDrawable = new CircleRoundDrawable(context, setPlaceHolder(), w, h);
+            circleRoundDrawable.setRoundAngle(cornerPercent);
+            circleRoundDrawable.setType(1);
+            RequestOptions options = new RequestOptions().transform(new GlideRoundTransform(context, corner));
+            GlideApp.with(context)
+                    .load(url + "?x-oss-process=image/resize,p_100")
+                    .apply(options)
+                    .thumbnail(GlideApp.with(context).load(url + "?x-oss-process=image/resize,p_30").apply(options))
+                    .placeholder(circleRoundDrawable)
+                    .error(circleRoundDrawable)
+                    .into(iv);
+        }
+    }
+
+    /**
      * 加载半圆角图
      * @param context
      * @param iv
