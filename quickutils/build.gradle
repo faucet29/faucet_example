@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 
 def configInfo = rootProject.ext.android
 def libraries = rootProject.ext.dependencies
-def app_version_code = 1010003
-def app_version_name = '1.1.0.3'
+def app_version_code = 1010004
+def app_version_name = '1.1.0.4'
 android {
     compileSdkVersion configInfo.compileSdkVersion
     defaultConfig {
@@ -68,6 +68,9 @@ dependencies {
     api 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     api 'com.github.bumptech.glide:okhttp3-integration:4.10.0'
+    // glide圆角、遮罩、毛玻璃
+//    api 'jp.wasabeef:blurry:3.0.0'
+//    api 'jp.wasabeef:glide-transformations:4.1.0'
 
     api 'com.github.SherlockGougou:BigImageViewPager:v4_2.2.0'
 }

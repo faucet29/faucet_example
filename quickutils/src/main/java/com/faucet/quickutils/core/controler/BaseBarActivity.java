@@ -84,7 +84,7 @@ public class BaseBarActivity extends BaseActivity {
             getDefaultToolbar().findViewById(R.id.ib_bar_back).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    finish();
+                    onBackPressed();
                 }
             });
         } else {

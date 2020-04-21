@@ -13,6 +13,7 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
 public class SwipeBackActivity extends AppCompatActivity implements BGASwipeBackHelper.Delegate {
     private BGASwipeBackHelper mSwipeBackHelper;
+    private boolean isSwipeBackEnable = true;
 
     protected void onCreate(Bundle savedInstanceState) {
         // 在 super.onCreate(savedInstanceState) 之前调用该方法
@@ -22,6 +23,7 @@ public class SwipeBackActivity extends AppCompatActivity implements BGASwipeBack
 
     public void setSwipeBackEnable(Boolean isEnable) {
         if (mSwipeBackHelper != null) {
+            isSwipeBackEnable = isEnable;
             mSwipeBackHelper.setSwipeBackEnable(isEnable);
         }
     }
@@ -83,15 +85,24 @@ public class SwipeBackActivity extends AppCompatActivity implements BGASwipeBack
      */
     @Override
     public void onSwipeBackLayoutExecuted() {
-        mSwipeBackHelper.swipeBackward();
+        if (mSwipeBackHelper != null)
+            mSwipeBackHelper.swipeBackward();
     }
 
     @Override
     public void onBackPressed() {
-        // 正在滑动返回的时候取消返回按钮事件
-        if (mSwipeBackHelper.isSliding()) {
-            return;
+        if (mSwipeBackHelper != null) {
+            // 正在滑动返回的时候取消返回按钮事件
+            if (mSwipeBackHelper.isSliding()) {
+                return;
+            }
+            if (isSwipeBackEnable) {
+                mSwipeBackHelper.backward();
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
         }
-        mSwipeBackHelper.backward();
     }
 }

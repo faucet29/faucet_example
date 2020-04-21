@@ -10,12 +10,14 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import com.bumptech.glide.util.Util;
 
 import java.security.MessageDigest;
 
@@ -122,5 +124,23 @@ public class GlideHalfRoundTransform implements Transformation<Bitmap> {
     @Override
     public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
 
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof GlideHalfRoundTransform) {
+            final GlideHalfRoundTransform other = (GlideHalfRoundTransform) obj;
+            return radius == other.radius;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Util.hashCode(getId().hashCode(), Util.hashCode(radius));
+    }
+
+    public String getId() {
+        return getClass().getName();
     }
 }
