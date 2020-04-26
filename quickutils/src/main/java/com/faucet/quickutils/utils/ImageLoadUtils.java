@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Created by mac on 16/9/9.
  */
-public abstract class ImageUtils {
+public abstract class ImageLoadUtils {
 
     protected abstract int setPlaceHolder ();
     private static Map<String, CircleRoundDrawable> circleRoundDrawableMap = new HashMap<>();

@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 
 def configInfo = rootProject.ext.android
 def libraries = rootProject.ext.dependencies
-def app_version_code = 1010004
-def app_version_name = '1.1.0.4'
+def app_version_code = 1010005
+def app_version_name = '1.1.0.5'
 android {
     compileSdkVersion configInfo.compileSdkVersion
     defaultConfig {
