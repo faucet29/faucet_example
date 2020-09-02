@@ -73,4 +73,8 @@ dependencies {
 //    api 'jp.wasabeef:glide-transformations:4.1.0'
 
     api 'com.github.SherlockGougou:BigImageViewPager:v4_2.2.0'
+    // 查看大图，单独添加核心 module Transferee, 之后至少还需要添加以下三种图片加载器中的一种
+    api 'com.github.Hitomis.transferee:Transferee:1.6.1'
+    // 添加 Glide 图片加载器
+    api 'com.github.Hitomis.transferee:GlideImageLoader:1.6.1'
 }
