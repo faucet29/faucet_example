@@ -1,13 +1,18 @@
 package com.faucet.faucetexample;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +28,19 @@ public class MainActivity extends AppCompatActivity {
         EditText et_chat = findViewById(R.id.et_chat);
         RelativeLayout root_layout = findViewById(R.id.root_layout);
         List<String> list = new ArrayList<>();
-        for (int i=0;i<100;i++) {
-            list.add("测试数据" + i);
-        }
+        list.add("仿微信、钉钉群组头像");
         final ChatAdapter chatAdapter = new ChatAdapter(list);
         rv_chat.setLayoutManager(new LinearLayoutManager(this));
         rv_chat.setAdapter(chatAdapter);
-        root_layout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        chatAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onLayoutChange(View view, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (oldBottom != -1 && oldBottom > bottom) {
-                    rv_chat.requestLayout();
-                    rv_chat.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            rv_chat.scrollToPosition(chatAdapter.getData().size() -1);
-                        }
-                    });
+            public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                Intent intent;
+                switch (position) {
+                    case 0:
+                        intent = new Intent(MainActivity.this, GroupHeadViewActivity.class);
+                        startActivity(intent);
+                        break;
                 }
             }
         });

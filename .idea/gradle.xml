@@ -13,11 +13,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/autoattendance" />
-            <option value="$PROJECT_DIR$/camera" />
             <option value="$PROJECT_DIR$/dbmaker" />
             <option value="$PROJECT_DIR$/greendao" />
-            <option value="$PROJECT_DIR$/groupheadviewexmample" />
-            <option value="$PROJECT_DIR$/groupheadviewlib" />
             <option value="$PROJECT_DIR$/maputil" />
             <option value="$PROJECT_DIR$/quickutils" />
           </set>

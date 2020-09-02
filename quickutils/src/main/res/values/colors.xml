@@ -7,4 +7,15 @@
     <color name="text_main_black">#333333</color>
     <color name="text_main_gray">#999999</color>
     <color name="transparent">#00000000</color>
+
+    <string-array name="color_array">
+        <item>#fbadca</item>
+        <item>#e6a4e1</item>
+        <item>#d6adff</item>
+        <item>#6690fd</item>
+        <item>#7ad1ae</item>
+        <item>#66d5ff</item>
+        <item>#fdcd98</item>
+        <item>#b6da85</item>
+    </string-array>
 </resources>
