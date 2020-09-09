@@ -25,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final RecyclerView rv_chat = findViewById(R.id.rv_chat);
-        EditText et_chat = findViewById(R.id.et_chat);
-        RelativeLayout root_layout = findViewById(R.id.root_layout);
         List<String> list = new ArrayList<>();
         list.add("仿微信、钉钉群组头像");
+        list.add("popwindow测试");
         final ChatAdapter chatAdapter = new ChatAdapter(list);
         rv_chat.setLayoutManager(new LinearLayoutManager(this));
         rv_chat.setAdapter(chatAdapter);
@@ -39,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         intent = new Intent(MainActivity.this, GroupHeadViewActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        intent = new Intent(MainActivity.this, PopWindowActivity.class);
                         startActivity(intent);
                         break;
                 }

@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root_layout"
-    tools:context=".MainActivity">
+    tools:context=".PopWindowActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_chat"/>
-
+    <Button
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_130"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="180dp"
+        android:id="@+id/bt_test"/>
 </RelativeLayout>
