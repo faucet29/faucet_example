@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bezier.BezierActivity"
+    android:background="#1d1d1d"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/bg"/>
+
+    <com.faucet.faucetexample.bezier.MaskView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/mask"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dp_50">
+
+        <SeekBar
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:id="@+id/seek_bar"/>
+
+        <SeekBar
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/seek_bar2"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox"
+            android:textColor="#ffffff"
+            android:text="是否反转"/>
+    </LinearLayout>
+</RelativeLayout>

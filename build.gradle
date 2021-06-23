@@ -6,7 +6,9 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
-        
+        maven {
+            url "https://maven.meitu.city/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
@@ -19,6 +21,9 @@ buildscript {
 
 allprojects {
     repositories {
+        flatDir {
+            dirs 'libs'
+        }
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
